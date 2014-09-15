@@ -312,3 +312,17 @@
   }%
 }
 
+%%% Acknowledgments
+
+\newcommand{\@acknowledgments}{}
+\newcommand{\acknowledgments}[1]{%
+  \renewcommand{\@acknowledgments}{#1}
+}
+
+\newcommand{\acknowledgmentspage}{%
+  \cleardoublepage
+  \chapter{Acknowledgments}
+  \label{cha:acknowledgments}
+  \pagestyle{plain}
+  \@acknowledgments
+}
