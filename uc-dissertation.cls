@@ -16,8 +16,8 @@
 %% ========================================================================
 %% Identification
 %% ========================================================================
-\def\fileversion{0.1}
-\def\filedate{2014/09/03}
+\newcommand\fileversion{0.1.1}
+\newcommand\filedate{2014/09/03}
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{uc-dissertation}[\filedate\space University of Cincinnati dissertation class by Jireh Loreaux (v\fileversion)]
 
@@ -25,8 +25,17 @@
 %% Option parsing
 %% ========================================================================
 
+
+\DeclareOption{comply}{%
+  \PassOptionsToClass{oneside,11pt,toc=listofnumbered,toc=bibnumbered}{scrbook}
+}
+
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{scrbook}}
 \ProcessOptions\relax
 
-\LoadClass[oneside,11pt,toc=listofnumbered,toc=bibnumbered,letterpaper]{scrbook}
+%% ========================================================================
+%% Package loading
+%% ========================================================================
 
+%% Base class
+\LoadClass{scrbook}
