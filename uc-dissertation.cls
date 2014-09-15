@@ -16,7 +16,7 @@
 %% ========================================================================
 %% Identification
 %% ========================================================================
-\newcommand\fileversion{0.4}
+\newcommand\fileversion{0.9}
 \newcommand\filedate{2014/09/03}
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{uc-dissertation}[\filedate\space University of Cincinnati dissertation class by Jireh Loreaux (v\fileversion)]
@@ -25,7 +25,13 @@
 %% Option parsing
 %% ========================================================================
 
-
+\DeclareOption{chap}{%
+  \AtEndOfClass{%
+    \RequirePackage[Lenny]{fncychap}
+    \ChNameVar{\usekomafont{title}\Large}
+    \ChTitleVar{\usekomafont{title}\Huge}
+  }%
+}
 \DeclareOption{comply}{%
   \PassOptionsToClass{oneside,11pt,toc=listofnumbered,toc=bibnumbered}{scrbook}
 }
@@ -62,6 +68,27 @@
 %% Counters for loops
 \newcounter{LoopCountOne}
 \newcounter{LoopCountTwo}
+
+%%% Miscellany 
+
+%% Typesets a chapter quote
+\DeclareRobustCommand{\chapterquote}[2]{%
+  {%
+    \singlespacing%
+    \begin{minipage}{0.7\textwidth}%
+      \noindent\emph{``#1''}%
+      \begin{flushright}%
+        --- #2%
+      \end{flushright}%
+    \end{minipage}%
+    \vspace{1cm}%
+  }%
+}
+
+%% Don't break enumerations (etc.) across pages in
+%% an ugly manner
+\clubpenalty = 10000
+\widowpenalty = 10000
 
 %%% Title page macros and user input commands
 
