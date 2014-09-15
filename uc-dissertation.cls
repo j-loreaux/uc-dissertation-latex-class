@@ -240,3 +240,18 @@
     \end{minipage}
   \end{titlepage}
 }
+
+%%% Abstract
+
+\newcommand{\@abstract}{}
+\newcommand{\abstract}[1]{%
+  \renewcommand{\@abstract}{#1}
+}
+
+\newcommand{\abstractpage}{%
+  \cleardoublepage
+  \chapter{Abstract}
+  \label{cha:abstract}
+  \pagestyle{plain}
+  \@abstract
+}
