@@ -32,7 +32,24 @@
     \ChTitleVar{\usekomafont{title}\Huge}
   }%
 }
+
 \DeclareOption{comply}{%
+  \PassOptionsToClass{oneside,11pt,toc=listofnumbered,toc=bibnumbered}{scrbook}%
+  \AtEndOfClass{%
+    \let\oldmainmatter\mainmatter%
+    \renewcommand\mainmatter{%
+      \oldmainmatter%
+      \doublespacing%
+    }%
+    \let\oldbackmatter\backmatter%
+    \renewcommand\backmatter{%
+      \oldbackmatter%
+      \singlespacing%
+    }%
+  }%
+}
+
+\DeclareOption{comply-nospace}{%
   \PassOptionsToClass{oneside,11pt,toc=listofnumbered,toc=bibnumbered}{scrbook}
 }
 
@@ -353,3 +370,4 @@
   \pagestyle{plain}
   \@acknowledgments
 }
+
