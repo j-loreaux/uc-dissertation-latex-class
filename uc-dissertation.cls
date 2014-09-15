@@ -255,3 +255,60 @@
   \pagestyle{plain}
   \@abstract
 }
+
+%%% Copyright page
+
+\newcommand{\copyrightpage}[1][all]{%
+  \cleardoublepage
+  \thispagestyle{empty}
+  \ifthenelse{\isempty{#1}}{\hfill\par}{%
+    \hfill\par%
+    \vskip 0.33\textheight%
+    \begin{center}
+      {%
+        \usekomafont{publishers}{%
+          \addcontentsline{toc}{chapter}{Copyright}%
+          \copyright{} \the\year{} by \@author.%
+          \ifthenelse{\equal{all}{#1}}{ All rights reserved.}{} \par
+          \vskip 1em \par
+          \ifthenelse{\isin{cc}{#1}}{%
+            {Released under a Creative Commons \par}%
+          }{}
+          \ifthenelse{\isin{by}{#1}}{%
+            {Attribution--}%
+          }{}%
+          \ifthenelse{\isin{nc}{#1}}{%
+            {NonCommercial--}%
+          }{}%
+          \ifthenelse{\isin{nd}{#1}}{%
+            {NoDerivatives \par
+              4.0 International License.
+            }%
+          }{}%
+          \ifthenelse{\isin{sa}{#1}}{%
+            {ShareAlike \par
+              4.0 International License.
+            }%
+          }{}%
+          \vskip 2em \par
+          \ifthenelse{\isin{cc}{#1}}{%
+            \includegraphics[width=0.75cm]{cc}
+          }{}
+          \ifthenelse{\isin{by}{#1}}{%
+            \includegraphics[width=0.75cm]{by}
+          }{}
+          \ifthenelse{\isin{nc}{#1}}{%
+            \includegraphics[width=0.75cm]{nc}
+          }{}
+          \ifthenelse{\isin{nd}{#1}}{%
+            \includegraphics[width=0.75cm]{nd}
+          }{}%
+          \ifthenelse{\isin{sa}{#1}}{%
+            \includegraphics[width=0.75cm]{sa}
+          }{}
+        }%
+      }%
+    \end{center}
+  }%
+}
+
