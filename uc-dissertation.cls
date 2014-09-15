@@ -16,7 +16,7 @@
 %% ========================================================================
 %% Identification
 %% ========================================================================
-\newcommand\fileversion{0.3}
+\newcommand\fileversion{0.4}
 \newcommand\filedate{2014/09/03}
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{uc-dissertation}[\filedate\space University of Cincinnati dissertation class by Jireh Loreaux (v\fileversion)]
@@ -187,3 +187,56 @@
   \renewcommand{\@logo}{\includegraphics[#1]{#2}}
 }
 
+%%% New title page design
+
+\renewcommand{\maketitle}[1][0em]{%
+  \begin{titlepage}
+    \begin{center}
+      \hrulefill\par \vskip 2em
+      {\usekomafont{title}{\huge \@title\par}}%
+      \vskip 1em
+      {\ifx\@subtitle\@empty\else\usekomafont{subtitle}{\@subtitle\par}\fi}%
+      \vskip 2em \hrulefill\par
+      \vskip \z@ \@plus4fill
+      \@logo
+      \vskip \z@ \@plus4fill
+      {\usekomafont{publishers}%
+        A dissertation submitted in partial fulfillment \\
+        of the requirements for the degree of \\
+        \@degreetoconfer{} \\
+      }
+      \vskip 2em
+      {\usekomafont{publishers}%
+        Department of \@department{} \\
+        \@college{} \\
+        \@university{}, \the\year{} \\
+      }      
+    \end{center}\par
+    \vskip \z@ \@plus4fill
+    \begin{minipage}[t][][b]{0.5\textwidth}
+      \begin{flushleft}
+        \begin{tabular}{ll}%
+          \ifdefempty{\@author}{}{%
+            \textbf{Author:} & \@author \\[#1]
+          }
+          \ifdefempty{\@previousdegrees}{}{%
+            \textbf{Degrees:}  \@previousdegrees
+          }
+        \end{tabular} 
+      \end{flushleft}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[t][][b]{0.5\textwidth}
+      \begin{flushleft}
+        \begin{tabular}{ll}
+            \ifdefempty{\@chair}{}{%
+              \textbf{Chair:} & \@chair \\[#1]
+            }
+            \ifdefempty{\@committee}{}{%
+              \textbf{Committee:}  \@committee
+            }
+        \end{tabular}
+      \end{flushleft}
+    \end{minipage}
+  \end{titlepage}
+}
