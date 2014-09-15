@@ -16,7 +16,7 @@
 %% ========================================================================
 %% Identification
 %% ========================================================================
-\newcommand\fileversion{0.1.1}
+\newcommand\fileversion{0.2}
 \newcommand\filedate{2014/09/03}
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{uc-dissertation}[\filedate\space University of Cincinnati dissertation class by Jireh Loreaux (v\fileversion)]
@@ -39,3 +39,18 @@
 
 %% Base class
 \LoadClass{scrbook}
+
+%% Control structures
+\RequirePackage{xifthen}
+
+%% Line spacing
+\RequirePackage{setspace}
+
+%% Complex macro arguments
+\RequirePackage{xparse}
+
+%% Graphics management
+\RequirePackage{graphicx}
+
+%% General useful tools
+\RequirePackage{etoolbox}
