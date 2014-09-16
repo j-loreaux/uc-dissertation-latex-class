@@ -1,0 +1,225 @@
+% arara: clean: {files: [dissertation.aux, dissertation.bbl, dissertation.bcf, dissertation.blg, dissertation.glg, dissertation.glo, dissertation.gls, dissertation.glsdefs, dissertation.idx, dissertation.ilg, dissertation.ind, dissertation.ist, dissertation.lof, dissertation.log, dissertation.out, dissertation.run.xml, dissertation.sbg, dissertation.sbi, dissertation.sbo, dissertation.synctex.gz, dissertation.toc, introduction.aux, background.aux, results.aux, prerequisite-material.aux]}
+% arara: pdflatex 
+% arara: biber
+% arara: makeindex
+% arara: makeglossaries
+% arara: pdflatex
+% arara: pdflatex
+% shell: rm dissertation.[bgilors]* dissertation.toc *\~ *.aux UC_logo-[black]-eps-converted-to.pdf
+\documentclass[chap,comply,bibliography=totoc]{uc-dissertation} 
+
+
+%%%%% Essential packages
+
+% Basic math packages
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+% For making references
+\usepackage[style=alphabetic,firstinits=true,maxnames=10]{biblatex}
+% For glossary, index and list of symbols
+\usepackage{makeidx}
+\usepackage[toc]{glossaries}
+% For reformatting the ToC, LoF, LoT
+\usepackage{tocstyle}
+\usetocstyle{standard}
+
+
+
+%%%%% Packages for the electronic version
+
+% Create hyperlinks for cross references: load last unless otherwise specified
+\usepackage[hidelinks]{hyperref}
+
+
+
+
+%%%%% New theorem-like environments
+
+%%% amsthm environments
+% number the 'theorem' environments by section
+\newtheorem{theorem}{Theorem}[section]
+% make all other environments use the 'theorem' counter
+% so as to be consistent. This will produce things like
+% Theorem 1.1, Definition 1.2, Lemma 1.3, Theorem 1.4, etc. 
+\newtheorem{question}[theorem]{Question}
+\newtheorem{problem}[theorem]{Problem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{example}[theorem]{Example}
+% Equation numbering by section to match theorem numbering
+\numberwithin{equation}{section}
+
+
+
+%%%%% Set titlepage information
+
+%%% All desired titlepage info must be set before maketitle is called.
+
+\title{This is a title that \\ has multiple lines} 
+\subtitle{This subtitle is fairly short}
+
+\author{Lowly Candidate}
+%% The next command takes 3 mandatory and 1 optional argument.
+%% The optional argument is the number of previous degrees held
+%% by the candidate and defaults to 1. The mandatory arguments
+%% are semicolon separated lists of, respectively, the degrees 
+%% held, years obtained, and schools conferring those degrees.
+\previousdegrees[3]{%
+  B.A. Chemistry; M.S. Physics; M.S. Mathematics }{%
+  2000; 2002; 2007 }{%
+  University of Somewhere; University of Nowhere; University of Nebraska %
+}
+
+\chair{Random Advisor}
+%% The next command takes 1 mandatory and 1 optional argument.
+%% The optional argument is the number of committee members.
+%% defaults to 1. The mandatory argument is a semicolon 
+%% separated list of names of the committee members.
+\committee[3]{Other Member; Another Member; Y.A. Member}
+
+
+%% The following commands default to 'Mathematical Sciences',
+%% 'McMicken College of Arts and Sciences', and 'University 
+%% of Cincinnati' if they are not explicitly set by the user.
+\department{Mathematical Sciences}
+\college{Eponymous College of Arts and Sciences}
+\university{University of Somewhere}
+
+%%%%% Set other front matter
+
+\input{abstract}
+\input{acknowledgments}
+
+%%%%% Set bibliography file(s)
+
+\addbibresource{references.bib}
+
+%%%%% Add symbol list
+\newglossary[sbg]{symbol}{sbi}{sbo}{Notation}
+
+%%%%% Make glossary, index and symbol list
+\makeindex
+\makeglossaries
+
+\begin{document} 
+
+%%%%% Add the glossary definition file
+\input{glossary-definitions}
+
+%%%%% This starts the beginning material of the document. It resets the page
+%%%%% numbering to start at 1 and to display as roman numerals.
+\frontmatter
+
+%%%%% This typesets the title page as defined by the uc-dissertation class.
+\maketitle
+
+%% This command typesets the abstract defined by the user with the \abstract
+%% command. It starts a new page (on the right if the document is two-sided),
+%% and adds the abstract to the Table of Contents (really it typesets a 
+%% chapter).
+\abstractpage
+
+%% This makes the copyright page. It takes an optional argument which allows 
+%% the user to choose from multiple copyrights. The default is 'all': the 
+%% author reserves all rights to the document. This may be necessary depending 
+%% on journal restrictions. However, by setting the optional argument to empty, 
+%% i.e. [], the user can obtain a blank page instead of a copyright page (one
+%% of these two things is required by UC. Also, by using the strings 'cc',
+%% 'by','nc','nd', and 'sa', the user may choose a Creative Commons license.
+%% The only two accepted by UC are 'cc-by-nc-nd' and 'cc-by-nc-sa'. Note that
+%% the dashes are not strictly necessary and order doesn't matter. It is up to
+%% the user to come up with a valid Creative Commons license.
+%%
+%% TODO: add a 'custom' option which allows the user to build the copyright 
+%% page from scratch.
+\copyrightpage
+%% The above is equivalent to \copyrightpage[all]
+%% \copyrightpage[]
+%% \copyrightpage[cc-by-nc-nd]
+%% \copyrightpage[cc-by-nc-sa]
+
+
+%% This command typesets the acknowledgments defined by the user with the 
+%% \acknowledgments command. It starts a new page (on the right if the document 
+%% is two-sided), and adds the acknowledgments to the Table of Contents (really 
+%% it typesets a chapter).
+\acknowledgmentspage
+
+%% Typeset the table of contents
+\tableofcontents 
+
+%% Typeset the list of tables
+\listoftables
+
+%% Typeset the list of figures
+\listoffigures
+
+%% List of Illustrations
+%%
+%% This is probably one of the trickier elements of the dissertation if you have
+%% need of it. However, I will describe one way it can be accomplished. First, 
+%% you will want to create custom float, say 'illustration', and then create a 
+%% special command called \listofillustrations to typeset the list. For 
+%% information about custom floats, see 
+%%
+%% http://en.wikibooks.org/wiki/LaTeX/Floats,_Figures_and_Captions#Custom_floats
+%%
+%% and the package 'float'. For information about creating a \listofillustrations
+%% command, see
+%%
+%% http://texblog.org/2008/07/13/define-your-own-list-of/
+%% 
+%% and the package 'tocloft'. 
+
+%% Typeset the symbol list
+\printglossary[type=symbol]
+
+
+
+%%%%% This starts page numbering anew, with arabic numerals as opposed to the roman
+%%%%% numerals of the front matter.
+\mainmatter 
+
+\include{introduction}
+
+\include{background}
+
+\include{results}
+
+%%%%% This marks the end of the primary content and signals the start of additional
+%%%%% content like the bibliography, glossary and index.
+\backmatter
+
+%% Glossary
+\printglossary
+
+%% Bibliography
+\printbibliography
+
+%%%%% We have to use mainmatter again for spacing issues and for the correct 
+%%%%% labeling of appendix chapter in the ToC because UC has bad page order.
+%%%%% Below we use the mainmattertwo command defined by the uc-dissertation
+%%%%% class so that the page order is not reset.
+\mainmattertwo
+
+%% Appendices
+\appendix
+
+\include{prerequisite-material}
+
+%%%%% We now have to switch back to 
+\backmatter
+
+%%%%% Index
+\cleardoublepage
+\addcontentsline{toc}{chapter}{Index}
+\printindex
+
+
+\end{document}
