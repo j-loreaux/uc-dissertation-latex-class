@@ -34,7 +34,7 @@
 }
 
 \DeclareOption{comply}{%
-  \PassOptionsToClass{oneside,11pt,toc=listofnumbered,toc=bibnumbered}{scrbook}%
+  \PassOptionsToClass{oneside,11pt,toc=listofnumbered}{scrbook}%
   \AtEndOfClass{%
     \let\oldmainmatter\mainmatter%
     \renewcommand\mainmatter{%
@@ -46,11 +46,16 @@
       \oldbackmatter%
       \singlespacing%
     }%
+    \renewcommand*\mainmattertwo{%
+      \if@twoside\cleardoubleoddpage\else\clearpage\fi
+      \@mainmattertrue%
+      \doublespacing%
+    }
   }%
 }
 
 \DeclareOption{comply-nospace}{%
-  \PassOptionsToClass{oneside,11pt,toc=listofnumbered,toc=bibnumbered}{scrbook}
+  \PassOptionsToClass{oneside,11pt,toc=listofnumbered}{scrbook}
 }
 
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{scrbook}}
@@ -87,6 +92,12 @@
 \newcounter{LoopCountTwo}
 
 %%% Miscellany 
+
+%% Makes a mainmatter command that doesn't reset the page numbering.
+\newcommand*\mainmattertwo{%
+  \if@twoside\cleardoubleoddpage\else\clearpage\fi
+  \@mainmattertrue%
+}
 
 %% Typesets a chapter quote
 \DeclareRobustCommand{\chapterquote}[2]{%
