@@ -74,6 +74,9 @@
 %% Line spacing
 \RequirePackage{setspace}
 
+%% Date manipulations
+\RequirePackage{datetime}
+
 %% Complex macro arguments
 \RequirePackage{xparse}
 
@@ -93,7 +96,13 @@
 
 %%% Miscellany 
 
-%% Makes a mainmatter command that doesn't reset the page numbering.
+%% Create a date format using only the month and year (requires 'datetime')
+\newdateformat{monthonly}{\monthname[\THEMONTH]{} \THEYEAR}
+\renewcommand{\date}[2]{%
+  \newdate{fixed}{01}{#1}{#2}
+}
+
+%% Makes a mainmatter command that doesn't reset the page numbering
 \newcommand*\mainmattertwo{%
   \if@twoside\cleardoubleoddpage\else\clearpage\fi
   \@mainmattertrue%
@@ -237,24 +246,25 @@
   }%
 }
 
-\newcommand{\@logo}{\includegraphics[width=0.5\textwidth]{UC_logo-[black]}}
+\newcommand{\@logo}{\includegraphics[width=2.9in]{UC_logo-[black]}}
 \newcommand{\logo}[2][width=0.5\textwidth]{%
   \renewcommand{\@logo}{\includegraphics[#1]{#2}}
 }
 
 %%% New title page design
 
-\renewcommand{\maketitle}[1][0em]{%
+\renewcommand{\maketitle}[1][]{%
   \begin{titlepage}
+    \monthonly
     \begin{center}
       \hrulefill\par \vskip 2em
       {\usekomafont{title}{\huge \@title\par}}%
       \vskip 1em
       {\ifx\@subtitle\@empty\else\usekomafont{subtitle}{\@subtitle\par}\fi}%
       \vskip 2em \hrulefill\par
-      \vskip \z@ \@plus4fill
+      \vskip 0.6in
       \@logo
-      \vskip \z@ \@plus4fill
+      \vskip 0.6in
       {\usekomafont{publishers}%
         A dissertation submitted in partial fulfillment \\
         of the requirements for the degree of \\
@@ -264,7 +274,7 @@
       {\usekomafont{publishers}%
         Department of \@department{} \\
         \@college{} \\
-        \@university{}, \the\year{} \\
+        \@university{}, \ifstrequal{#1}{fixed}{\displaydate{fixed}}{\today} \\
       }      
     \end{center}\par
     \vskip \z@ \@plus4fill
@@ -272,7 +282,7 @@
       \begin{flushleft}
         \begin{tabular}{ll}%
           \ifdefempty{\@author}{}{%
-            \textbf{Author:} & \@author \\[#1]
+            \textbf{Author:} & \@author \\
           }
           \ifdefempty{\@previousdegrees}{}{%
             \textbf{Degrees:}  \@previousdegrees
@@ -285,7 +295,7 @@
       \begin{flushleft}
         \begin{tabular}{ll}
             \ifdefempty{\@chair}{}{%
-              \textbf{Chair:} & \@chair \\[#1]
+              \textbf{Chair:} & \@chair \\
             }
             \ifdefempty{\@committee}{}{%
               \textbf{Committee:}  \@committee
@@ -293,6 +303,7 @@
         \end{tabular}
       \end{flushleft}
     \end{minipage}
+    \usdate
   \end{titlepage}
 }
 
