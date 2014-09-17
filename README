@@ -1,0 +1,72 @@
+To begin, be sure that you have the following 
+packages installed in your TeX distribution:
+xifthen, setspace, datetime, xparse, graphicx,
+etoolbox,
+and (optionally) fncychap, along with the 
+KOMA-script book class: scrbook.
+
+Next, place the class file somewhere in your 
+TeX path, preferably in your local directory tree.
+In general this belongs to the variable TEXMFHOME.
+The location of your local directory tree varies
+by system, but is generally:
+*Unix-like: ~/texmf/
+*MacTeX: Users/<username>/Library/texmf/ 
+	 The Library folder is hidden by default
+	 on recent versions of OS X (>= Lion). 
+	 This can be permenantly unhidden by 
+	 issuring the command:
+	 chflags nohidden ~/Library
+	 at a Terminal prompt. On Mavericks, this
+	 can be accomplished by accessing the 
+	 Finder menu item
+	 View >> Show View Options
+	 and checking the box 
+	 "Show Library Folder"
+*MikTeX: Your local directory tree can be any 
+	 folder you like, as long as you then 
+	 register it as a user-managed texmf 
+	 directory (see 
+	 http://docs.miktex.org/manual/
+	 localadditions.html#id573803)
+Within this local directory tree, assuming your
+TeX installation conforms to the TeX Directory
+Structure (TDS), which most modern distributions
+do, you should place the class file in
+$TEXMFHOME/tex/latex/base
+
+After installing the class file in the 
+appropriate directory, it is important to check
+that your installation of TeX can use the class
+file. If you have kpsewhich installed, this is
+as simple as entering:
+kpsewhich uc-dissertation.cls
+in a shell. Otherwise, you can copy and paste
+the text below into an empty .tex file and try
+to compile it.
+
+--------------------------------------------------
+
+\documentclass{uc-dissertation}
+\begin{document}
+Hello World!
+\end{document}
+
+--------------------------------------------------
+
+If this doesn't compile properly, try to figure 
+out why. It could be that TeX doesn't know where
+to find the uc-dissertation.cls file, or it could
+be because your distribution of TeX does not have
+the required dependencies. 
+
+Assuming this compiles properly, you are ready to
+move on to the template. For instructions on how
+to use the template, consult the dissertation.tex
+file within the template/ directory. You probably
+want to make a copy of this directory and start 
+using the copy as the working directory for your
+dissertation.
+
+Happy TeXing! Oh, and good luck on that whole 
+"dissertation" thing...  ;-) 
