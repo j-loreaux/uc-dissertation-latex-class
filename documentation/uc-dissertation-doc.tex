@@ -1,0 +1,128 @@
+\documentclass{article}
+
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{listings}
+\usepackage{multicol}
+\usepackage{hyperref}
+
+\title{The \texttt{uc-dissertation} document class}
+\author{Jireh Loreaux}
+
+\begin{document}
+
+\definecolor{darkgreen}{rgb}{0,0.75,0}
+\lstdefinestyle{tex-command-syntax}{%
+  language={[LaTeX]TeX}, 
+  basicstyle=\ttfamily\upshape,
+  texcsstyle=*\color{blue},
+  xleftmargin=\parindent,
+  commentstyle=\color{gray},
+  moredelim=[is][\color{orange}\rmfamily\itshape]{+}{+},
+  moredelim=[is][\color{darkgreen}\rmfamily\itshape]{|}{|},
+  literate={>}{{$\rangle$}}{1}
+  {<}{{$\langle$}}{1}
+  }
+\lstset{style=tex-command-syntax}
+
+\maketitle
+
+\section{Purpose and requirements}
+
+The purpose of this \LaTeX{} class is to provide an all-inclusive user-friendly method for students (especially in mathematics) at the University of Cincinnati to write their dissertations. 
+The University of Cincinnati has some very strict guidelines for preparing the dissertation.
+The Electronic Thesis and Dissertation (\href{http://grad.uc.edu/student-life/etd.html}{ETD}) page has a timeline for completion during the last semester and the various steps along the way.
+There is also a \href{http://grad.uc.edu/student-life/etd/formatting.html}{formatting} page that lists a series of requirements, which we reproduce below.
+
+\begin{description}
+\item[Spacing] Double-space all text. Long quotations and footnotes may be single-spaced.
+\item[Font] 11-point or larger is recommended for readability. 
+No matter what font you choose, all fonts \emph{must} be embedded in your final PDF.
+\item[Margins] Approximately one inch of white space should be at the top, bottom and sides on each page.
+\item[Page Numbers] Except for the title page, number all pages in your ETD.
+  \begin{itemize}
+  \item Number the pages preceding the body of the text with small
+    roman numerals (i, ii, iii, iv, etc.), placed at the bottom center
+    of the page.  Remember, the page number for the Title Page (i)
+    should not be visible.  
+  \item Number all pages through the body,
+    bibliography, appendices and index with Arabic numerals (1, 2, 3,
+    etc.).  All numbering should be in the bottom-center of the page.
+  \end{itemize}
+\item[Footnotes] Recommended placement of footnotes is at the bottom of the appropriate page. 
+  It is not advisable to place them at the end of chapters where they are difficult to consult. 
+  Please consult with your committee to determine which style is appropriate for your field.
+\item[Illustrations] May consist of line drawings, graphs, maps, photographs, chemical formulas, or musical scores or passages. 
+  All of these should be inserted into the PDF document (not linked to external sources).
+\item[Title] Do \emph{not} use all capital letters for your title. 
+  Capital letters are still appropriate for acronyms, proper nouns, first letter, etc.
+\end{description}
+
+The \href{http://grad.uc.edu/student-life/etd/page_order.html}{Required Page Order} is as follows:
+
+\begin{multicols}{2}
+  \begin{enumerate}
+  \item Title page
+  \item Abstract
+  \item Copyright notice
+  \item Acknowledgments (O)
+  \item Table of Contents
+  \item List of Tables (IF)
+  \item List of Figures (IF)
+  \item List of Symbols (IF)
+  \item Body text
+  \item Glossary (IF)
+  \item Bibliography
+  \item Appendices (IF)
+  \item Index (IF)
+  \item Audio/Video
+  \end{enumerate}
+\end{multicols}
+
+Those items followed by (IF) signify that they should only be included \emph{if needed}. 
+For example, if a student has only one figure throughout his/her entire dissertation, there is no reason to include a List of Figures.
+If, on the other hand, the student has over twenty figures, it would probably be good practice to include such a list. 
+Use your best judgment for each item. The Acknowledgments page is optional, as indicated by the (O) appended to its entry. 
+If a student desires a Dedication in addition to, or instead of, the Acknowledgments, it should be placed either immediately preceding or immediately succeeding the acknowledgments.
+
+There are a few special points that need to be addressed. 
+First and foremost, the abstract must be \emph{500 words or less}, with \emph{no exceptions}. 
+Including tables and figures in the abstract is strongly discouraged. 
+Please check with the Graduate School if you must use tables or figures in your abstract. 
+While the graduate school doesn't specify about the use of symbols (mathematical or otherwise) in the abstract, it is generally poor practice to include such in an abstract. 
+The reason for this is that abstracts are often posted in places where the typesetting is somewhat simplistic and does not easily accommodate the inclusion of symbols. 
+Similarly, because the abstract should be able to be dissociated from the complete dissertation, one should not insert citations using the bibliography in the abstract; the authors last names will suffice for this purpose if necessary. 
+
+Another small point is that if the student plans to include video, only MPEG, MP4, and AVI files can be inserted directly into the PDF.
+Finally, there are several items which are required to appear on the title page. These are:
+\begin{multicols}{2}
+  \begin{enumerate}\itemsep0pt
+  \item obviously, the title,
+  \item author name and date,
+  \item previous degrees,
+  \item degree to be conferred,
+  \item department and college, and
+  \item name of committee chair
+  \end{enumerate}
+\end{multicols}
+
+\section{Provisions and user input}
+
+\subsection{Class base and options}
+
+The \verb+uc-dissertation+ class is based on the KOMA-script book class \verb+scrbook+. 
+As a result, you may pass any options of the \verb+scrbook+ class; however, those relating to elements redefined by \verb+uc-dissertation+ may not work as expected, especially those pertaining to the title page. 
+
+
+\begin{lstlisting}
+\documentclass[+<mand args>+]{|<classname>|}
+\end{lstlisting}
+
+\begin{figure}
+  \fbox{%
+    \includegraphics[width=\linewidth]{titlepage-commands.pdf}
+  }
+  \caption{User input and the title page}
+\end{figure}
+
+\end{document}
