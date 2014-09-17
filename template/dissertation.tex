@@ -5,7 +5,7 @@
 % arara: makeglossaries
 % arara: pdflatex
 % arara: pdflatex
-% shell: rm dissertation.[bgilors]* dissertation.toc *\~ *.aux UC_logo-[black]-eps-converted-to.pdf
+% bash: rm dissertation.[bgilors]* dissertation.toc *\~ *.aux UC_logo-[black]-eps-converted-to.pdf
 \documentclass[chap,comply,bibliography=totoc]{uc-dissertation} 
 
 
@@ -64,6 +64,12 @@
 \title{This is a title that \\ has multiple lines} 
 \subtitle{This subtitle is fairly short}
 
+%% The next command is a redefined date command that takes two
+%% arguments of the form {month}{year}, where 'month' is the 
+%% two-digit month, and 'year' is the four-digit year. In order 
+%% to activate this on the title page you must pass the option 
+%% 'fixed' to \maketitle, otherwise it will use \today
+\date{05}{2015}
 \author{Lowly Candidate}
 %% The next command takes 3 mandatory and 1 optional argument.
 %% The optional argument is the number of previous degrees held
@@ -117,7 +123,9 @@
 \frontmatter
 
 %%%%% This typesets the title page as defined by the uc-dissertation class.
-\maketitle
+%%%%% It takes an optional argument which, if set to 'fixed', displays the
+%%%%% month and year for the date defined above by \newdate instead of \today.
+\maketitle      %% or \maketitle[fixed]
 
 %% This command typesets the abstract defined by the user with the \abstract
 %% command. It starts a new page (on the right if the document is two-sided),
