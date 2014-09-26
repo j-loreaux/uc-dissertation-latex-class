@@ -17,7 +17,7 @@
 %% Identification
 %% ========================================================================
 \newcommand\fileversion{0.9}
-\newcommand\filedate{2014/09/03}
+\newcommand\filedate{2014/09/26}
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{uc-dissertation}[\filedate\space University of Cincinnati dissertation class by Jireh Loreaux (v\fileversion)]
 
@@ -93,6 +93,9 @@
 %% Counters for loops
 \newcounter{LoopCountOne}
 \newcounter{LoopCountTwo}
+
+%% Declare font for use on title page.
+\newkomafont{declaration}{\Large}
 
 %%% Miscellany 
 
@@ -265,13 +268,13 @@
       \vskip 0.6in
       \@logo
       \vskip 0.6in
-      {\usekomafont{publishers}%
+      {\usekomafont{declaration}%
         A dissertation submitted in partial fulfillment \\
         of the requirements for the degree of \\
         \@degreetoconfer{} \\
       }
       \vskip 2em
-      {\usekomafont{publishers}%
+      {\usekomafont{declaration}%
         Department of \@department{} \\
         \@college{} \\
         \@university{}, \ifstrequal{#1}{fixed}{\displaydate{fixed}}{\today} \\
@@ -332,7 +335,7 @@
     \vskip 0.33\textheight%
     \begin{center}
       {%
-        \usekomafont{publishers}{%
+        \usekomafont{declaration}{%
           \addcontentsline{toc}{chapter}{Copyright}%
           \copyright{} \the\year{} by \@author.%
           \ifthenelse{\equal{all}{#1}}{ All rights reserved.}{} \par
