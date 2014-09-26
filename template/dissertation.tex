@@ -57,48 +57,9 @@
 
 
 
-%%%%% Set titlepage information
+%%%%% Input front matter material
 
-%%% All desired titlepage info must be set before maketitle is called.
-
-\title{This is a title that \\ has multiple lines} 
-\subtitle{This subtitle is fairly short}
-
-%% The next command is a redefined date command that takes two
-%% arguments of the form {month}{year}, where 'month' is the 
-%% two-digit month, and 'year' is the four-digit year. In order 
-%% to activate this on the title page you must pass the option 
-%% 'fixed' to \maketitle, otherwise it will use \today
-\date{05}{2015}
-\author{Lowly Candidate}
-%% The next command takes 3 mandatory and 1 optional argument.
-%% The optional argument is the number of previous degrees held
-%% by the candidate and defaults to 1. The mandatory arguments
-%% are semicolon separated lists of, respectively, the degrees 
-%% held, years obtained, and schools conferring those degrees.
-\previousdegrees[3]{%
-  B.A. Chemistry; M.S. Physics; M.S. Mathematics }{%
-  2000; 2002; 2007 }{%
-  University of Somewhere; University of Nowhere; University of Nebraska %
-}
-
-\chair{Random Advisor}
-%% The next command takes 1 mandatory and 1 optional argument.
-%% The optional argument is the number of committee members.
-%% defaults to 1. The mandatory argument is a semicolon 
-%% separated list of names of the committee members.
-\committee[3]{Other Member; Another Member; Y.A. Member}
-
-
-%% The following commands default to 'Mathematical Sciences',
-%% 'McMicken College of Arts and Sciences', and 'University 
-%% of Cincinnati' if they are not explicitly set by the user.
-\department{Mathematical Sciences}
-\college{Eponymous College of Arts and Sciences}
-\university{University of Somewhere}
-
-%%%%% Set other front matter
-
+\input{titlepage-info}
 \input{abstract}
 \input{acknowledgments}
 
