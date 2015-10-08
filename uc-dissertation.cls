@@ -16,7 +16,7 @@
 %% ========================================================================
 %% Identification
 %% ========================================================================
-\newcommand\fileversion{0.9}
+\newcommand\fileversion{1.0}
 \newcommand\filedate{2014/09/26}
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{uc-dissertation}[\filedate\space University of Cincinnati dissertation class by Jireh Loreaux (v\fileversion)]
