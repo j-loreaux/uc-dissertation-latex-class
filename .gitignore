@@ -3,4 +3,6 @@
 **/auto/
 template/dissertation.[bgilors]*
 template/dissertation.toc
-template/UC_logo-\[black\]-eps-converted-to.pdf
+template-minimal/dissertation.[bgilors]*
+template-minimal/dissertation.toc
+

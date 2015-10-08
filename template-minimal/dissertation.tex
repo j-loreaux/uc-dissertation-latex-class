@@ -1,0 +1,140 @@
+% arara: clean: {files: [dissertation.aux, dissertation.bbl, dissertation.bcf, dissertation.blg, dissertation.log, dissertation.out, dissertation.run.xml, dissertation.synctex.gz, dissertation.toc, introduction.aux, background.aux, results.aux, prerequisite-material.aux]}
+% arara: pdflatex 
+% arara: biber
+% arara: pdflatex
+% arara: pdflatex
+% bash: rm dissertation.[bgilors]* dissertation.toc *\~ *.aux 
+\documentclass[chap,comply,bibliography=totoc]{uc-dissertation} 
+
+
+%%%%% Essential packages
+
+% Basic math packages
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+% For making references
+\usepackage[style=alphabetic,firstinits=true,maxnames=10]{biblatex}
+
+
+
+%%%%% Packages for the electronic version
+
+% Create hyperlinks for cross references: load last unless otherwise specified
+\usepackage[hidelinks]{hyperref}
+
+
+
+
+%%%%% New theorem-like environments
+
+%%% amsthm environments
+% number the 'theorem' environments by section
+\newtheorem{theorem}{Theorem}[section]
+% make all other environments use the 'theorem' counter
+% so as to be consistent. This will produce things like
+% Theorem 1.1, Definition 1.2, Lemma 1.3, Theorem 1.4, etc. 
+\newtheorem{question}[theorem]{Question}
+\newtheorem{problem}[theorem]{Problem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{example}[theorem]{Example}
+% Equation numbering by section to match theorem numbering
+\numberwithin{equation}{section}
+
+
+
+%%%%% Input front matter material
+
+\input{titlepage-info}
+\input{abstract}
+\input{acknowledgments}
+
+%%%%% Set bibliography file(s)
+
+\addbibresource{references.bib}
+
+
+\begin{document} 
+
+
+%%%%% This starts the beginning material of the document. It resets the page
+%%%%% numbering to start at 1 and to display as roman numerals.
+\frontmatter
+
+%%%%% This typesets the title page as defined by the uc-dissertation class.
+%%%%% It takes an optional argument which, if set to 'fixed', displays the
+%%%%% month and year for the date defined above by \newdate instead of \today.
+\maketitle      %% or \maketitle[fixed]
+
+%% This command typesets the abstract defined by the user with the \abstract
+%% command. It starts a new page (on the right if the document is two-sided),
+%% and adds the abstract to the Table of Contents (really it typesets a 
+%% chapter).
+\abstractpage
+
+%% This makes the copyright page. It takes an optional argument which allows 
+%% the user to choose from multiple copyrights. The default is 'all': the 
+%% author reserves all rights to the document. This may be necessary depending 
+%% on journal restrictions. However, by setting the optional argument to empty, 
+%% i.e. [], the user can obtain a blank page instead of a copyright page (one
+%% of these two things is required by UC. Also, by using the strings 'cc',
+%% 'by','nc','nd', and 'sa', the user may choose a Creative Commons license.
+%% The only two accepted by UC are 'cc-by-nc-nd' and 'cc-by-nc-sa'. Note that
+%% the dashes are not strictly necessary and order doesn't matter. It is up to
+%% the user to come up with a valid Creative Commons license.
+%%
+%% TODO: add a 'custom' option which allows the user to build the copyright 
+%% page from scratch.
+\copyrightpage
+%% The above is equivalent to \copyrightpage[all]
+%% \copyrightpage[]
+%% \copyrightpage[cc-by-nc-nd]
+%% \copyrightpage[cc-by-nc-sa]
+
+
+%% This command typesets the acknowledgments defined by the user with the 
+%% \acknowledgments command. It starts a new page (on the right if the document 
+%% is two-sided), and adds the acknowledgments to the Table of Contents (really 
+%% it typesets a chapter).
+\acknowledgmentspage
+
+%% Typeset the table of contents
+\tableofcontents 
+
+
+%%%%% This starts page numbering anew, with arabic numerals as opposed to the roman
+%%%%% numerals of the front matter.
+\mainmatter 
+
+\include{introduction}
+
+\include{background}
+
+\include{results}
+
+%%%%% This marks the end of the primary content and signals the start of additional
+%%%%% content like the bibliography, glossary and index.
+\backmatter
+
+%% Bibliography
+\printbibliography
+
+%%%%% We have to use mainmatter again for spacing issues and for the correct 
+%%%%% labeling of appendix chapter in the ToC because UC has bad page order.
+%%%%% Below we use the mainmattertwo command defined by the uc-dissertation
+%%%%% class so that the page order is not reset.
+\mainmattertwo
+
+%% Appendices
+\appendix
+
+\include{prerequisite-material}
+
+
+\end{document}
