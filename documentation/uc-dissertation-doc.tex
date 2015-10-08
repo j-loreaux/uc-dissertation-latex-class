@@ -464,6 +464,29 @@ The primary chapters are \verb!introduction!, \verb!background!, \verb!results! 
 These are inserted into the document via the \lstinline!\include! command because using this has the option of also calling \lstinline!\includeonly!, which saves time when compiling the document if you are only working on a certain part of the document.
 The \lstinline!\include!'d files also have their own \verb!aux! files, which shouldn't be necessary for things like the title page, abstract or acknowledgments pages.
 
+
+\section{Suggestions}
+
+The KOMA-Script book class \verb!scrbook.cls! (and hence also \verb!uc-dissertation.cls!) typesets section headings in a bold sans serif typeface.
+The author may wish to have a coherent style throughout their dissertation and thus would desire to typeset the titles/headings to theorem-like environments in the same way.
+This can be achieved by means of the \verb!thmtools! package.
+Among many other things, this package allows for the definition and customization of various theorem environment styles.
+Below we create an example style which forces the title of the theorem, as well as any accompanying note, to be typeset boldface and san serif.
+The other parameters are just included to make it look nice overall.
+See the documentation of the \verb!thmtools! package for more details.
+
+\begin{lstlisting}[frame=single,title={\texttt{thmtools} theorem style definition: sans serif}]
+\declaretheoremstyle[
+  spaceabove=6pt, 
+  spacebelow=6pt,
+  headfont=\sffamily\bfseries,
+  notefont=\sffamily\bfseries, 
+  notebraces={(}{)},
+  bodyfont=\itshape,
+  postheadspace=1em
+]{theorem}
+\end{lstlisting}
+
 \end{document}
 
 
